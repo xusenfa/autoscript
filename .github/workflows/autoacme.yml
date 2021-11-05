@@ -1,0 +1,35 @@
+name: Auto update certificates
+
+on:
+  workflow_dispatch:
+  watch:
+    types: [started]
+  repository_dispatch:
+    types: "update certificates"
+
+env:
+  ACME: /home/runner/.acme.sh/acme.sh
+  NETLIFY_ACCESS_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
+  RCLONECONFADDR: ${{ secrets.RCLONECONFADDR }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install & Configure ACME.SH
+        run: |
+          curl  https://get.acme.sh | sh
+          curl https://rclone.org/install.sh | sudo bash
+          rclone copyurl $RCLONECONFADDR /home/runner/.config/rclone/rclone.conf
+      - name: Issue & Deploy Certificates
+        run: |
+          mkdir -p ./ssl
+          $ACME --register-account -m q211798501@hotmail.com --server zerossl
+          $ACME --issue --dns dns_netlify -d moesakura.cc -d *.moesakura.cc -k ec-256
+      - name: Upload
+        run: |
+          rclone copyto /home/runner/.acme.sh/moesakura.cc_ecc/fullchain.cer ali:moesakura/certificates/moesakura.cc.cer
+          rclone copyto /home/runner/.acme.sh/moesakura.cc_ecc/moesakura.cc.key ali:moesakura/certificates/moesakura.cc.key
