@@ -29,7 +29,9 @@ jobs:
           mkdir -p ./ssl
           $ACME --register-account -m q211798501@hotmail.com --server zerossl
           $ACME --issue --dns dns_netlify -d moesakura.cc -d *.moesakura.cc -k ec-256
-      - name: Upload
+      - name: Upload & gd sync
         run: |
           rclone copyto /home/runner/.acme.sh/moesakura.cc_ecc/fullchain.cer ali:moesakura/certificates/moesakura.cc.cer
           rclone copyto /home/runner/.acme.sh/moesakura.cc_ecc/moesakura.cc.key ali:moesakura/certificates/moesakura.cc.key
+          rclone dedupe gd:
+          rclone sync gd: gdnew:
