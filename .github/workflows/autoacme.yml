@@ -9,7 +9,7 @@ on:
 
 env:
   ACME: /home/runner/.acme.sh/acme.sh
-  NETLIFY_ACCESS_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
+  VULTR_API_KEY: ${{ secrets.VULTR_API_KEY }}
   RCLONECONFADDR: ${{ secrets.RCLONECONFADDR }}
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
         run: |
           mkdir -p ./ssl
           $ACME --register-account -m q211798501@hotmail.com --server zerossl
-          $ACME --issue --dns dns_netlify -d moesakura.cc -d *.moesakura.cc -k ec-256
+          $ACME --issue --dns dns_vultr -d moesakura.cc -d *.moesakura.cc -k ec-256
       - name: Upload & gd sync
         run: |
           rclone copyto /home/runner/.acme.sh/moesakura.cc_ecc/fullchain.cer ali:moesakura/certificates/moesakura.cc.cer
