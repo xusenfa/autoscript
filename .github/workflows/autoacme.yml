@@ -23,7 +23,7 @@ jobs:
         run: |
           curl  https://get.acme.sh | sh
           curl https://rclone.org/install.sh | sudo bash
-          rclone copyurl $RCLONECONFADDR /home/runner/.config/rclone/rclone.conf
+          ${{ secrets.RCLONECONF }}
       - name: Issue & Deploy Certificates
         run: |
           mkdir -p ./ssl
