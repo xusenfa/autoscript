@@ -10,7 +10,7 @@ on:
 env:
   ACME: /home/runner/.acme.sh/acme.sh
   VULTR_API_KEY: ${{ secrets.VULTR_API_KEY }}
-  RCLONECONFADDR: ${{ secrets.RCLONECONFADDR }}
+  RCLONECONF: ${{ secrets.RCLONECONF }}
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
           curl  https://get.acme.sh | sh
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p /home/runner/.config/rclone
-          ${{ secrets.RCLONECONF }}
+          base64 -di > /home/runner/.config/rclone/rclone.conf <<< '$RCLONECONF'
       - name: Issue & Deploy Certificates
         run: |
           mkdir -p ./ssl
