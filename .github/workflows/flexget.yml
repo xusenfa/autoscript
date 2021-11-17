@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p /home/runner/.config/rclone
-          base64 -di > /home/runner/.config/rclone/rclone.conf <<< '$RCLONECONF'
+          base64 -di > /home/runner/.config/rclone/rclone.conf <<< $RCLONECONF
       - name: Copy File
         run: |
           git clone https://oauth2:${{ secrets.REPO_TOKEN }}@github.com/xusenfa/autoscriptbackend.git
