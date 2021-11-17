@@ -24,7 +24,7 @@ jobs:
           curl  https://get.acme.sh | sh
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
-          base64 -di > ~/.config/rclone/rclone.conf <<< '$RCLONECONF'
+          base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
       - name: Issue & Deploy Certificates
         run: |
           mkdir -p ./ssl
