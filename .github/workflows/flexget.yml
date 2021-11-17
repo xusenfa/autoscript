@@ -8,6 +8,7 @@ on:
     types: ["Flexget execute", "Flexget learn"]
 env:
   RCLONECONF: ${{ secrets.RCLONECONF }}
+  REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
 
 jobs:
   build:
@@ -26,7 +27,7 @@ jobs:
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
       - name: Copy File
         run: |
-          git clone https://oauth2:${{ secrets.REPO_TOKEN }}@github.com/xusenfa/autoscriptbackend.git
+          git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
           rclone copyto ali:moesakura/flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install FlexGet
         run: |
