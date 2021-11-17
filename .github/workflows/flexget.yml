@@ -28,7 +28,7 @@ jobs:
       - name: Copy File
         run: |
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
-          rclone copyto ali:moesakura/flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
+          rclone copyto mega1:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install FlexGet
         run: |
           pip install --upgrade wheel
@@ -49,4 +49,4 @@ jobs:
           flexget database vacuum
       - name: Upload
         run: |
-          rclone copyto autoscriptbackend/flexget/db-config.sqlite ali:moesakura/flexget/db-config.sqlite
+          rclone copyto autoscriptbackend/flexget/db-config.sqlite mega1:flexget/db-config.sqlite
