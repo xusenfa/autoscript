@@ -32,7 +32,7 @@ jobs:
           $ACME --issue --dns dns_vultr -d moesakura.cc -d *.moesakura.cc -k ec-256
       - name: Upload & gd sync
         run: |
-          rclone copyto ~/.acme.sh/moesakura.cc_ecc/fullchain.cer mega1:certificates/moesakura.cc.cer
-          rclone copyto ~/.acme.sh/moesakura.cc_ecc/moesakura.cc.key mega1:certificates/moesakura.cc.key
+          rclone copyto ~/.acme.sh/moesakura.cc_ecc/fullchain.cer megaunion:certificates/moesakura.cc.cer
+          rclone copyto ~/.acme.sh/moesakura.cc_ecc/moesakura.cc.key megaunion:certificates/moesakura.cc.key
           rclone dedupe gd:
           rclone sync gd: gdnew:
