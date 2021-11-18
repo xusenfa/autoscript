@@ -34,5 +34,3 @@ jobs:
         run: |
           rclone copyto ~/.acme.sh/moesakura.cc_ecc/fullchain.cer megaunion:certificates/moesakura.cc.cer
           rclone copyto ~/.acme.sh/moesakura.cc_ecc/moesakura.cc.key megaunion:certificates/moesakura.cc.key
-          rclone dedupe gd:
-          rclone sync gd: gdnew:
