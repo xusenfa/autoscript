@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install & Configure ACME.SH & Rclone
+      - name: Install & Configure acme.sh & Rclone
         run: |
           curl  https://get.acme.sh | sh
           curl https://rclone.org/install.sh | sudo bash
