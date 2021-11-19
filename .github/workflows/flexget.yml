@@ -6,6 +6,7 @@ on:
     types: [started]
   repository_dispatch:
     types: ["FlexGet execute", "FlexGet learn"]
+
 env:
   RCLONECONF: ${{ secrets.RCLONECONF }}
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
