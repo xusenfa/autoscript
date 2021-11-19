@@ -5,7 +5,7 @@ on:
   watch:
     types: [started]
   repository_dispatch:
-    types: "update certificates"
+    types: "Update certificates"
 
 env:
   ACME: /home/runner/.acme.sh/acme.sh
@@ -19,18 +19,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install & Configure ACME.SH
+      - name: Install & Configure ACME.SH & Rclone
         run: |
           curl  https://get.acme.sh | sh
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-      - name: Issue & Deploy Certificates
+      - name: Issue certificates
         run: |
           mkdir -p ./ssl
           $ACME --register-account -m q211798501@hotmail.com --server zerossl
           $ACME --issue --dns dns_vultr -d moesakura.cc -d *.moesakura.cc -k ec-256
-      - name: Upload & gd sync
+      - name: Upload certificates
         run: |
           rclone copyto ~/.acme.sh/moesakura.cc_ecc/fullchain.cer megaunion:certificates/moesakura.cc.cer
           rclone copyto ~/.acme.sh/moesakura.cc_ecc/moesakura.cc.key megaunion:certificates/moesakura.cc.key

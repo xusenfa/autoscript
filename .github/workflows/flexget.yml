@@ -1,11 +1,11 @@
-name: Flexget
+name: FlexGet
 
 on:
   workflow_dispatch:
   watch:
     types: [started]
   repository_dispatch:
-    types: ["Flexget execute", "Flexget learn"]
+    types: ["FlexGet execute", "FlexGet learn"]
 env:
   RCLONECONF: ${{ secrets.RCLONECONF }}
   REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-      - name: Install dependencies
+      - name: Install dependencies & Set up Rclone
         run: |
           python -m pip install --upgrade pip
           curl https://rclone.org/install.sh | sudo bash
@@ -29,24 +29,24 @@ jobs:
         run: |
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
           rclone copyto megaunion:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
-      - name: Install FlexGet
+      - name: Install & Configure FlexGet
         run: |
           pip install --upgrade wheel
           pip install --upgrade setuptools
           pip install --ignore-installed flexget
           cp -rl autoscriptbackend/flexget/. ~/.flexget
       - name: FlexGet execute
-        if: github.event.action == 'Flexget execute'
+        if: github.event.action == 'FlexGet execute'
         run: |
           flexget execute
           flexget database clean
           flexget database vacuum
       - name: FlexGet learn
-        if: github.event.action == 'Flexget learn'
+        if: github.event.action == 'FlexGet learn'
         run: |
           flexget execute --learn
           flexget database clean
           flexget database vacuum
-      - name: Upload
+      - name: Upload FlexGet database
         run: |
           rclone copyto autoscriptbackend/flexget/db-config.sqlite megaunion:flexget/db-config.sqlite
