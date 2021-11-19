@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   watch:
     types: [started]
+  repository_dispatch:
+    types: ["rclonedaily", "11"]
 
 env:
   RCLONECONF: ${{ secrets.RCLONECONF }}
@@ -16,8 +18,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install & Configure ACME.SH & Rclone
+        if: github.event.action == 'rclonedaily'
         run: |
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
           rclone sync gd: gdnew:
+          rclone sync gdpersonal: megaunion:gdpersonalbackup
