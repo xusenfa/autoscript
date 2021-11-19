@@ -1,4 +1,4 @@
-name: Test
+name: Cloudstorage actions
 
 on:
   workflow_dispatch:
@@ -20,3 +20,4 @@ jobs:
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
+          rclone sync gd: gdnew:
