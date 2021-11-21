@@ -26,7 +26,7 @@ jobs:
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-      - name: Copy File
+      - name: Copy FlexGet File
         run: |
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
           rclone copyto megaunion:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
