@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install & Configure ACME.SH & Rclone
+      - name: Install Rclone && Rclone actions
         if: github.event.action == 'rclonedaily'
         run: |
           curl https://rclone.org/install.sh | sudo bash
