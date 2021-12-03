@@ -23,5 +23,4 @@ jobs:
           curl https://rclone.org/install.sh | sudo bash
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-          rclone sync gd: gdnew:
           rclone sync gdpersonal: megaunion:gdpersonalbackup --drive-acknowledge-abuse
