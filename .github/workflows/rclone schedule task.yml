@@ -25,4 +25,4 @@ jobs:
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-          rclone sync gdpersonal: megaunion:gdpersonalbackup --drive-acknowledge-abuse
+          sleep 1
