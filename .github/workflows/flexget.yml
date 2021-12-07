@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies & Set up Rclone
         run: |
           python -m pip install --upgrade pip
-          wget $(curl -s https://api.github.com/repos/rclone/rclone/releases/latest | grep browser_download_url | grep linux-amd64.zip | cut -d '"' -f 4)
+          wget https://gdworker.moesakura.cc/Program/rclone-linux-amd64.zip
           unzip *.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
