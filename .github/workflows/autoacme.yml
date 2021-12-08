@@ -22,7 +22,7 @@ jobs:
       - name: Install & Configure acme.sh & Rclone
         run: |
           curl  https://get.acme.sh | sh
-          unzip *.zip
+          unzip rclone-linux-amd64.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
