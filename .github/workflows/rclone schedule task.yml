@@ -20,7 +20,6 @@ jobs:
       - name: Install Rclone && Rclone actions
         if: github.event.action == 'rclonedaily'
         run: |
-          wget https://gdrive.xusenfa.workers.dev/Program/rclone-linux-amd64.zip
           unzip *.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone

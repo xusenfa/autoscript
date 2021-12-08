@@ -22,7 +22,6 @@ jobs:
       - name: Install & Configure acme.sh & Rclone
         run: |
           curl  https://get.acme.sh | sh
-          wget https://gdrive.xusenfa.workers.dev/Program/rclone-linux-amd64.zip
           unzip *.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
