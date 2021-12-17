@@ -33,9 +33,7 @@ jobs:
           rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install & Configure FlexGet
         run: |
-          pip install --upgrade wheel
-          pip install --upgrade setuptools
-          pip install --ignore-installed flexget
+          pip install flexget
           cp -rl autoscriptbackend/flexget/. ~/.flexget
       - name: FlexGet execute
         if: github.event.action == 'FlexGet execute'
