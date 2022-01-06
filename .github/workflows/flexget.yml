@@ -33,7 +33,7 @@ jobs:
           rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install & Configure FlexGet
         run: |
-          pip install flexget
+          pip install flexget -i https://mirrors.aliyun.com/pypi/simple
           cp -rl autoscriptbackend/flexget/. ~/.flexget
       - name: FlexGet execute
         if: github.event.action == 'FlexGet execute'
