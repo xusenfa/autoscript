@@ -25,5 +25,5 @@ jobs:
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-          rclone copyurl https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt $ALIOSSNAME/rule-providers/greatfire.txt
+          rclone copyurl https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt $ALIOSSNAME/rule-providers/gfw.txt
           rclone copyurl https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt $ALIOSSNAME/rule-providers/cncidr.txt
