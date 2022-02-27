@@ -22,7 +22,7 @@ jobs:
           python-version: "3.10"
       - name: Install dependencies & Set up Rclone
         run: |
-          python -m pip install wheel -i https://mirrors.aliyun.com/pypi/simple
+          python -m pip install wheel
           unzip rclone-linux-amd64.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
@@ -33,7 +33,7 @@ jobs:
           rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install & Configure FlexGet
         run: |
-          pip install flexget -i https://mirrors.aliyun.com/pypi/simple
+          pip install flexget
           cp -rl autoscriptbackend/flexget/. ~/.flexget
       - name: FlexGet execute
         if: github.event.action == 'FlexGet execute'
