@@ -20,28 +20,28 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-      - name: Install dependencies & Set up Rclone
+      - name: Copy backend File
         run: |
+          git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
+          rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
+      - name: Install dependencies & Set up Rclone & file rename
+        run: |
+          python3 autoscriptbackend/renamer.py
           python -m pip install wheel
           unzip rclone-linux-amd64.zip
           sudo cp rclone*/rclone /usr/bin/rclone
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
-      - name: Copy FlexGet File
-        run: |
-          git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
-          rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: Install & Configure FlexGet
         run: |
           pip install flexget
           cp -rl autoscriptbackend/flexget/. ~/.flexget
-      - name: FlexGet execute && file rename
+      - name: FlexGet execute
         if: github.event.action == 'FlexGet execute'
         run: |
           flexget execute
           flexget database clean
           flexget database vacuum
-          python3 autoscriptbackend/renamer.py
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
         run: |
