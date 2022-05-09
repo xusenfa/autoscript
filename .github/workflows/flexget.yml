@@ -35,12 +35,13 @@ jobs:
         run: |
           pip install flexget
           cp -rl autoscriptbackend/flexget/. ~/.flexget
-      - name: FlexGet execute
+      - name: FlexGet execute && file rename
         if: github.event.action == 'FlexGet execute'
         run: |
           flexget execute
           flexget database clean
           flexget database vacuum
+          python3 ~/autoscriptbackend/renamer.py
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
         run: |
