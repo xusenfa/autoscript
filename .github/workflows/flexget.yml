@@ -41,7 +41,7 @@ jobs:
           flexget execute
           flexget database clean
           flexget database vacuum
-          python3 ~/autoscriptbackend/renamer.py
+          python3 autoscriptbackend/renamer.py
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
         run: |
