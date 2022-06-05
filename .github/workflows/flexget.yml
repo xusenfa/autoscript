@@ -39,6 +39,8 @@ jobs:
       - name: FlexGet execute
         if: github.event.action == 'FlexGet execute'
         run: |
+          python3 autoscriptbackend/a.py
+          python3 autoscriptbackend/1.py
           flexget execute
           flexget database clean
           flexget database vacuum
@@ -50,4 +52,5 @@ jobs:
           flexget database vacuum
       - name: Upload FlexGet database
         run: |
-          rclone copyto autoscriptbackend/flexget/db-config.sqlite gdpersonal:flexget/db-config.sqlite
+          python3 autoscriptbackend/0.py
+          python3 autoscriptbackend/upload.py
