@@ -52,5 +52,5 @@ jobs:
           flexget database clean
       - name: Upload FlexGet database
         run: |
-          python3 autoscriptbackend/0.py
           python3 autoscriptbackend/upload.py
+          python3 autoscriptbackend/0.py
