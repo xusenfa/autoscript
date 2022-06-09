@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.10"
-      - name:  Set up Rclone &Copy backend File
+      - name: Set up Rclone &Copy backend File
         run: |
           unzip rclone-linux-amd64.zip
           sudo cp rclone*/rclone /usr/bin/rclone
