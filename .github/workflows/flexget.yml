@@ -27,7 +27,6 @@ jobs:
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
-          rclone copyto gdpersonal:flexget/db-config.sqlite autoscriptbackend/flexget/db-config.sqlite
       - name: file rename & Install dependencies
         run: |
           python3 autoscriptbackend/renamer.py
@@ -41,6 +40,7 @@ jobs:
         run: |
           python3 autoscriptbackend/a.py
           python3 autoscriptbackend/1.py
+          rclone copyto gdpersonal:flexget/db-config.sqlite ~/.flexget/db-config.sqlite
           flexget execute
           flexget database vacuum
           flexget database clean
