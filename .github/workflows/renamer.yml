@@ -1,0 +1,32 @@
+name: FlexGet
+
+on:
+  workflow_dispatch:
+  watch:
+    types: [started]
+  repository_dispatch:
+    types: ["Renamer execute"]
+
+env:
+  RCLONECONF: ${{ secrets.RCLONECONF }}
+  REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Set up Rclone &Copy backend File
+        run: |
+          unzip rclone-linux-amd64.zip
+          sudo cp rclone*/rclone /usr/bin/rclone
+          mkdir -p ~/.config/rclone
+          base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
+          git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
+      - name: file rename & Install dependencies
+        run: |
+          python3 autoscriptbackend/renamer.py
