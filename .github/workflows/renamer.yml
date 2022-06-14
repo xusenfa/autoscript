@@ -1,4 +1,4 @@
-name: FlexGet
+name: Renamer
 
 on:
   workflow_dispatch:
@@ -27,6 +27,6 @@ jobs:
           mkdir -p ~/.config/rclone
           base64 -di > ~/.config/rclone/rclone.conf <<< $RCLONECONF
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
-      - name: file rename & Install dependencies
+      - name: file rename
         run: |
           python3 autoscriptbackend/renamer.py
