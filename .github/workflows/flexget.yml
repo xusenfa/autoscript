@@ -44,6 +44,7 @@ jobs:
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
         run: |
+          python3 autoscriptbackend/1.py
           flexget execute --learn
       - name: Upload FlexGet database
         run: |
