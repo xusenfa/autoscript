@@ -39,7 +39,7 @@ jobs:
         run: |
           python3 autoscriptbackend/a.py
           python3 autoscriptbackend/1.py
-          rclone copyto gdpersonal:flexget/db-config.sqlite ~/.flexget/db-config.sqlite
+          rclone copyto cloudflarer2:moesakura/flexget/db-config.sqlite ~/.flexget/db-config.sqlite
           flexget execute
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
