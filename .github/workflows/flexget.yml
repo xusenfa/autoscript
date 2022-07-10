@@ -40,7 +40,7 @@ jobs:
           python3 autoscriptbackend/a.py
           python3 autoscriptbackend/1.py
           rclone copyto cloudflarer2:moesakura/flexget/db-config.sqlite ~/.flexget/db-config.sqlite
-          wget "https://share.dmhy.org/topics/rss/rss.xml"
+          wget -q "https://share.dmhy.org/topics/rss/rss.xml"
           flexget execute
       - name: FlexGet learn
         if: github.event.action == 'FlexGet learn'
