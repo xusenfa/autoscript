@@ -29,7 +29,8 @@ jobs:
           git clone https://oauth2:$REPO_TOKEN@github.com/xusenfa/autoscriptbackend.git
       - name: Install dependencies
         run: |
-          python -m pip install wheel
+          python3 -m pip install wheel
+          python3 -m pip install colorama
       - name: Install & Configure FlexGet
         run: |
           pip install flexget
