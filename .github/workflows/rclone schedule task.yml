@@ -17,7 +17,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Rclone && Rclone actions
         if: github.event.action == 'rclonedaily'
         run: |
